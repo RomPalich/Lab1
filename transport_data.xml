@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<TransportSystem>
+  <Routes>
+    <Route>
+      <route_id>1</route_id>
+      <number>т77</number>
+      <start_point>Ивановское</start_point>
+      <end_point>МЦД Новогиреево</end_point>
+      <Vehicles>
+        <Vehicle>
+          <vehicle_id>1</vehicle_id>
+          <model>НефАЗ 5299</model>
+          <capacity>77</capacity>
+          <type>Автобус</type>
+        </Vehicle>
+        <Vehicle>
+          <vehicle_id>2</vehicle_id>
+          <model>МАЗ-203</model>
+          <capacity>80</capacity>
+          <type>Автобус</type>
+        </Vehicle>
+      </Vehicles>
+    </Route>
+    <Route>
+      <route_id>2</route_id>
+      <number>37</number>
+      <start_point>Курский вокзал</start_point>
+      <end_point>3-я Владимирская</end_point>
+      <Vehicles>
+        <Vehicle>
+          <vehicle_id>4</vehicle_id>
+          <model>Tatra T3SU</model>
+          <capacity>95</capacity>
+          <type>Трамвай</type>
+        </Vehicle>
+      </Vehicles>
+    </Route>
+  </Routes>
+  <Passengers>
+    <Passenger>
+      <passenger_id>1</passenger_id>
+      <name>Иван Иванов</name>
+      <card_number>0021095222</card_number>
+    </Passenger>
+    <Passenger>
+      <passenger_id>2</passenger_id>
+      <name>Мария Петрова</name>
+      <card_number>0022112312</card_number>
+    </Passenger>
+    <Passenger>
+      <passenger_id>3</passenger_id>
+      <name>Петр Петров</name>
+      <card_number>0023123312</card_number>
+    </Passenger>
+  </Passengers>
+  <Schedules>
+    <Schedule>
+      <schedule_id>1</schedule_id>
+      <route_id>1</route_id>
+      <departure_time>08:00</departure_time>
+      <arrival_time>08:45</arrival_time>
+    </Schedule>
+    <Schedule>
+      <schedule_id>2</schedule_id>
+      <route_id>1</route_id>
+      <departure_time>14:00</departure_time>
+      <arrival_time>14:45</arrival_time>
+    </Schedule>
+    <Schedule>
+      <schedule_id>3</schedule_id>
+      <route_id>3</route_id>
+      <departure_time>11:10</departure_time>
+      <arrival_time>11:25</arrival_time>
+    </Schedule>
+  </Schedules>
+</TransportSystem>

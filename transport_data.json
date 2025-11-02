@@ -1,0 +1,75 @@
+{
+  "routes": [
+    {
+      "route_id": 1,
+      "number": "т77",
+      "start_point": "Ивановское",
+      "end_point": "МЦД Новогиреево",
+      "vehicles": [
+        {
+          "vehicle_id": 1,
+          "model": "НефАЗ 5299",
+          "capacity": 77,
+          "type": "Автобус"
+        },
+        {
+          "vehicle_id": 2,
+          "model": "МАЗ-203",
+          "capacity": 80,
+          "type": "Автобус"
+        }
+      ]
+    },
+    {
+      "route_id": 2,
+      "number": "37",
+      "start_point": "Курский вокзал",
+      "end_point": "3-я Владимирская",
+      "vehicles": [
+        {
+          "vehicle_id": 4,
+          "model": "Tatra T3SU",
+          "capacity": 95,
+          "type": "Трамвай"
+        }
+      ]
+    }
+  ],
+  "passengers": [
+    {
+      "passenger_id": 1,
+      "name": "Иван Иванов",
+      "card_number": "0021095222"
+    },
+    {
+      "passenger_id": 2,
+      "name": "Мария Петрова",
+      "card_number": "0022112312"
+    },
+    {
+      "passenger_id": 3,
+      "name": "Петр Петров",
+      "card_number": "0023123312"
+    }
+  ],
+  "schedules": [
+    {
+      "schedule_id": 1,
+      "route_id": 1,
+      "departure_time": "08:00",
+      "arrival_time": "08:45"
+    },
+    {
+      "schedule_id": 2,
+      "route_id": 1,
+      "departure_time": "14:00",
+      "arrival_time": "14:45"
+    },
+    {
+      "schedule_id": 3,
+      "route_id": 3,
+      "departure_time": "11:10",
+      "arrival_time": "11:25"
+    }
+  ]
+}
