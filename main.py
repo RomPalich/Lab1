@@ -35,18 +35,12 @@ class Vehicle:
     """Класс транспортного средства"""
 
     def __init__(self, vehicle_id: int, model: str, capacity: int, vehicle_type: str):
-        self._validate_positive(vehicle_id, "ID транспортного средства")
-        self._validate_positive(capacity, "Вместимость")
 
         self.vehicle_id = vehicle_id
         self.model = model
         self.capacity = capacity
         self.type = vehicle_type
 
-    def _validate_positive(self, value: int, field_name: str) -> None:
-        """Валидация положительных значений"""
-        if value <= 0:
-            raise InvalidDataError(f"{field_name} должен быть положительным числом")
 
     def to_dict(self) -> Dict:
         """Преобразование объекта в словарь"""
@@ -67,15 +61,11 @@ class Vehicle:
             vehicle_type=data['type']
         )
 
-    def __str__(self) -> str:
-        return f"{self.type} {self.model} (Вместимость: {self.capacity}, ID: {self.vehicle_id})"
-
 
 class Route:
     """Класс маршрута"""
 
     def __init__(self, route_id: int, number: str, start_point: str, end_point: str):
-        self._validate_positive(route_id, "ID маршрута")
 
         self.route_id = route_id
         self.number = number
@@ -83,10 +73,6 @@ class Route:
         self.end_point = end_point
         self.vehicles: List[Vehicle] = []
 
-    def _validate_positive(self, value: int, field_name: str) -> None:
-        """Валидация положительных значений"""
-        if value <= 0:
-            raise InvalidDataError(f"{field_name} должен быть положительным числом")
 
     def add_vehicle(self, vehicle: Vehicle) -> None:
         """Добавление транспортного средства к маршруту"""
@@ -141,16 +127,10 @@ class Passenger:
     """Класс пассажира"""
 
     def __init__(self, passenger_id: int, name: str, card_number: str):
-        self._validate_positive(passenger_id, "ID пассажира")
 
         self.passenger_id = passenger_id
         self.name = name
         self.card_number = card_number
-
-    def _validate_positive(self, value: int, field_name: str) -> None:
-        """Валидация положительных значений"""
-        if value <= 0:
-            raise InvalidDataError(f"{field_name} должен быть положительным числом")
 
     def to_dict(self) -> Dict:
         """Преобразование объекта в словарь"""
@@ -177,18 +157,11 @@ class Schedule:
     """Класс расписания"""
 
     def __init__(self, schedule_id: int, route_id: int, departure_time: str, arrival_time: str):
-        self._validate_positive(schedule_id, "ID расписания")
-        self._validate_positive(route_id, "ID маршрута")
 
         self.schedule_id = schedule_id
         self.route_id = route_id
         self.departure_time = departure_time
         self.arrival_time = arrival_time
-
-    def _validate_positive(self, value: int, field_name: str) -> None:
-        """Валидация положительных значений"""
-        if value <= 0:
-            raise InvalidDataError(f"{field_name} должен быть положительным числом")
 
     def to_dict(self) -> Dict:
         """Преобразование объекта в словарь"""
@@ -247,14 +220,13 @@ class TransportSystem:
         route = self.read_route(route_id)
         self.routes.remove(route)
 
-    def find_route(self, route_id: int) -> Optional[Route]:
+    def find_route(self, route_id: int):
         """Поиск маршрута по ID"""
         for route in self.routes:
             if route.route_id == route_id:
                 return route
         return None
 
-    # CRUD операции для пассажиров
     def create_passenger(self, passenger: Passenger) -> None:
         """Создание нового пассажира"""
         if not isinstance(passenger, Passenger):
@@ -275,7 +247,7 @@ class TransportSystem:
             data = {
                 'routes': [route.to_dict() for route in self.routes],
                 'passengers': [passenger.to_dict() for passenger in self.passengers],
-                'schedules': [schedule.to_dict() for schedule in self.schedules]
+                'schedules': [schedule.to_dict() for schedule in self.schedules],
             }
             with open(filename, 'w', encoding='utf-8') as f:
                 json.dump(data, f, indent=2, ensure_ascii=False)
@@ -291,6 +263,7 @@ class TransportSystem:
             self.routes = [Route.from_dict(route_data) for route_data in data.get('routes', [])]
             self.passengers = [Passenger.from_dict(passenger_data) for passenger_data in data.get('passengers', [])]
             self.schedules = [Schedule.from_dict(schedule_data) for schedule_data in data.get('schedules', [])]
+
         except Exception as e:
             raise FileOperationError(f"Ошибка загрузки JSON: {str(e)}")
 
@@ -396,10 +369,7 @@ def main():
         # Демонстрация данных
         transport_system.display_all_data()
 
-        # Демонстрация CRUD операций
-        print("\n" + "=" * 50)
-        print("ДЕМОНСТРАЦИЯ CRUD ОПЕРАЦИЙ")
-        print("=" * 50)
+
 
         # Чтение маршрута
         print(f"\nЧтение маршрута 1: {transport_system.read_route(1)}")
@@ -428,12 +398,6 @@ def main():
         print("\n" + "=" * 50)
         print("ДЕМОНСТРАЦИЯ ОБРАБОТКИ ОШИБОК")
         print("=" * 50)
-
-        try:
-            # Попытка создать неверный объект
-            invalid_vehicle = Vehicle(-1, "Test", -10, "Invalid")
-        except InvalidDataError as e:
-            print(f"Ошибка: {e}")
 
         try:
             # Попытка найти несуществующий маршрут
